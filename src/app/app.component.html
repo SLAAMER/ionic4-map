@@ -1,15 +1,15 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu>
+    <ion-menu side="end">
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="dark">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of pulseras.arreglo">
+            <ion-item (click)="changePosition(p)">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               {{p.title}}
               <div class="item-note" slot="end">

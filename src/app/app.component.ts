@@ -1,40 +1,22 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { PulserasService } from './pulseras/pulseras.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public appPages = [
-    {
-      title: 'Omar',
-      note: 'Pulsera de Omar',
-      icon: 'baseball'
-    },
-    {
-      title: 'Cesar',
-      note: 'Pulsera de Cesar',
-      icon: 'basketball'
-    },
-    {
-      title: 'Frida',
-      note: 'Pulsera de Frida',
-      icon: 'flower'
-    },{
-      title: 'Juan',
-      note: 'Pulsera de Juan',
-      icon: 'beer'
-    }
-  ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private events: Events,
+    private pulseras: PulserasService
   ) {
     this.initializeApp();
   }
@@ -44,5 +26,9 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  changePosition(event){
+    this.events.publish("newLocation", event);
   }
 }
