@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,15 @@ export class PulserasService {
       }
     }
   ]
-  constructor() { }
+  constructor(private storage: Storage) { 
+    this.storage.set("pulseras", this.arreglo);
+  }
+
+  public getPulseras(){
+    return this.storage.get("pulseras");
+  }
+
+  public setPulseras(arreglo){
+    return this.storage.set("pulseras", arreglo);
+  }
 }

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pulseras Guardadas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addPulsera()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <ion-item *ngFor="let p of pulseras">
+      <ion-icon slot="start" [name]="p.icon"></ion-icon>
+      {{p.title}}
+      <div class="item-note" slot="end">
+      {{p.note}}
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

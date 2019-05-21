@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform, Events } from '@ionic/angular';
-import { GoogleMaps, GoogleMap, LocationService, MyLocation, MarkerOptions, CameraPosition } from '@ionic-native/google-maps/ngx'
-import { PulserasService } from '../pulseras/pulseras.service';
+import { GoogleMaps, GoogleMap, LocationService, MyLocation } from '@ionic-native/google-maps/ngx';
+import { PulserasService } from '../services/pulseras/pulseras.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +14,9 @@ export class HomePage implements OnInit{
   map: GoogleMap;
   position:MyLocation;
 
-  constructor(private platform: Platform, private events:Events, private pulseras:PulserasService){
+  constructor(private platform: Platform, private events:Events, private pulseras:PulserasService, private router: Router){
     this.listen();
+    this.listenPul();
   }
 
   async ngOnInit(){
@@ -76,4 +78,18 @@ export class HomePage implements OnInit{
     }).catch(err=>alert(JSON.stringify(err)));
   }
 
+  configure(){
+    this.router.navigateByUrl('/pulseras');
+  }
+
+  listenPul(){
+    this.events.subscribe("pulseras", (pul:Array<{ title: string; note: string; icon: string; position: { lat:number, lng:number } }>)=>{
+      let p = pul[pul.length-1];
+      this.map.addMarker({
+        position: p.position,
+        title: p.note,
+        icon: 'red'
+      });
+    })
+  }
 }

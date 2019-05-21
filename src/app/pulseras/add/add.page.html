@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>Agregar Pulsera</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input [(ngModel)]="nueva.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Descripcion</ion-label>
+      <ion-input [(ngModel)]="nueva.note"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="selecIcono()">Selecciona Icono</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="selecLoc()">Selecciona Locacion</ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-button color="success" (click)="guardar()">Guardar</ion-button>
+</ion-content>
