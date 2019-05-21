@@ -51,6 +51,9 @@ export class PulserasService {
           this.events.publish("pulseras", this.arreglo);
         }
         else{
+          this.storage.get("pulseras").then((pul)=>{
+            this.events.publish("pulseras", pul);
+          });
         }
       });
     })
