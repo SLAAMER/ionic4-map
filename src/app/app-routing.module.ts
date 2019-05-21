@@ -14,7 +14,9 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
-  }
+  },
+  { path: 'pulseras', loadChildren: './pulseras/pulseras.module#PulserasPageModule' },
+  { path: 'add', loadChildren: './pulseras/add/add.module#AddPageModule' }
 ];
 
 @NgModule({
