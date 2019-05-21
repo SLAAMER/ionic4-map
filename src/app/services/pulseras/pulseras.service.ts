@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Events } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +43,18 @@ export class PulserasService {
       }
     }
   ]
-  constructor(private storage: Storage) { 
-    this.storage.get("pulseras").then((pulseras)=>{
-      if(!pulseras){
-        this.storage.set("pulseras", this.arreglo);
-      }
-    });
+  constructor(private storage: Storage, private events: Events) { 
+    this.storage.ready().then(()=>{
+      this.storage.get("pulseras").then((pulseras)=>{
+        if(pulseras == null){
+          this.storage.set("pulseras", this.arreglo);
+          this.events.publish("pulseras", this.arreglo);
+        }
+        else{
+        }
+      });
+    })
+    
   }
 
   public getPulseras(){

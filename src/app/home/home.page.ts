@@ -23,7 +23,7 @@ export class HomePage implements OnInit{
     await this.platform.ready();
     await this.loadMap();
     await this.loadMarkers();
-    await this.mylocation();
+    //await this.mylocation();
   }
 
   loadMap(){
@@ -42,23 +42,28 @@ export class HomePage implements OnInit{
     });
   }
 
-  mylocation(){
-    LocationService.getMyLocation({enableHighAccuracy:true}).then((location:MyLocation) =>{
-      this.position = location;
-      this.map.addMarkerSync({
-        position:  this.position.latLng,
-        title: 'Yo estoy aqui',
-        icon: 'yellow'
+  locateMe(){
+    if(!this.position){
+      LocationService.getMyLocation({enableHighAccuracy:true}).then((location:MyLocation) =>{
+        this.position = location;
+        this.map.addMarkerSync({
+          position:  this.position.latLng,
+          title: 'Yo estoy aqui',
+          icon: 'yellow'
+        });
+        this.map.animateCamera({
+          target: this.position.latLng,
+          zoom:16,
+          duration:2000,
+          tilt:45
+        });
+      }).catch(err=>{
+        alert(JSON.stringify(err));
       });
-      this.map.animateCamera({
-        target: this.position.latLng,
-        zoom:16,
-        duration:2000,
-        tilt:45
-      });
-    }).catch(err=>{
-      alert(JSON.stringify(err));
-    });
+    }
+    else{
+      this.locateMeCamera();
+    }
   }
 
   listen(){
@@ -75,7 +80,7 @@ export class HomePage implements OnInit{
     });
   }
 
-  locateMe(){
+  locateMeCamera(){
     this.map.animateCamera({
       target: this.position.latLng,
       duration: 1500,

@@ -36,9 +36,9 @@ export class AppComponent {
   }
 
   listenPul(){
-    this.pulserasService.getPulseras().then((pul)=>{
+    /*this.pulserasService.getPulseras().then((pul)=>{
       this.pulseras = pul;
-    });
+    });*/
 
     this.events.subscribe("pulseras", (pul)=>{
       this.pulseras = pul;
