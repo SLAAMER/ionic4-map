@@ -11,12 +11,14 @@ import { PulserasService } from './services/pulseras/pulseras.service';
 })
 export class AppComponent {
 
+  pulseras:any = [];
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private events: Events,
-    private pulseras: PulserasService
+    private pulserasService: PulserasService
   ) {
     this.initializeApp();
   }
@@ -34,9 +36,13 @@ export class AppComponent {
   }
 
   listenPul(){
+    this.pulserasService.getPulseras().then((pul)=>{
+      this.pulseras = pul;
+    });
+
     this.events.subscribe("pulseras", (pul)=>{
-      this.pulseras.arreglo = pul;
-      console.log(this.pulseras.arreglo);
+      this.pulseras = pul;
+      //console.log(this.pulserasService.arreglo);
       
     });
   }

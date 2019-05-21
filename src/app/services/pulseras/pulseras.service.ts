@@ -43,7 +43,11 @@ export class PulserasService {
     }
   ]
   constructor(private storage: Storage) { 
-    this.storage.set("pulseras", this.arreglo);
+    this.storage.get("pulseras").then((pulseras)=>{
+      if(!pulseras){
+        this.storage.set("pulseras", this.arreglo);
+      }
+    });
   }
 
   public getPulseras(){

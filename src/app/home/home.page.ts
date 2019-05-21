@@ -31,17 +31,19 @@ export class HomePage implements OnInit{
   }
 
   loadMarkers(){
-    this.pulseras.arreglo.forEach((pulsera)=>{
-      this.map.addMarker({
-        position: pulsera.position,
-        title: pulsera.note,
-        icon: 'red'
+    this.pulseras.getPulseras().then((pul)=>{
+      pul.forEach((pulsera)=>{
+        this.map.addMarker({
+          position: pulsera.position,
+          title: pulsera.title + ': ' +pulsera.note,
+          icon: 'red'
+        });
       });
     });
   }
 
   mylocation(){
-    LocationService.getMyLocation().then((location:MyLocation) =>{
+    LocationService.getMyLocation({enableHighAccuracy:true}).then((location:MyLocation) =>{
       this.position = location;
       this.map.addMarkerSync({
         position:  this.position.latLng,
@@ -66,7 +68,9 @@ export class HomePage implements OnInit{
           lat: selected.position.lat,
           lng: selected.position.lng
         },
-        duration: 1500
+        duration: 1500,
+        zoom:16,
+        tilt:45
       })
     });
   }
@@ -74,7 +78,9 @@ export class HomePage implements OnInit{
   locateMe(){
     this.map.animateCamera({
       target: this.position.latLng,
-      duration: 1500
+      duration: 1500,
+      zoom:16,
+      tilt:45
     }).catch(err=>alert(JSON.stringify(err)));
   }
 
@@ -87,7 +93,7 @@ export class HomePage implements OnInit{
       let p = pul[pul.length-1];
       this.map.addMarker({
         position: p.position,
-        title: p.note,
+        title: p.title+ ': '+p.note,
         icon: 'red'
       });
     })

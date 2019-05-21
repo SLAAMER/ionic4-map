@@ -2,12 +2,12 @@
   <ion-menu side="end">
     <ion-header>
       <ion-toolbar color="dark">
-        <ion-title>Menu</ion-title>
+        <ion-title>Pulseras Registradas</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of pulseras.arreglo">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pulseras">
           <ion-item (click)="changePosition(p)">
             <ion-icon slot="start" [name]="p.icon"></ion-icon>
             {{p.title}}
