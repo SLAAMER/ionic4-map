@@ -1,25 +1,23 @@
 <ion-app>
-  <ion-split-pane>
-    <ion-menu side="end">
-      <ion-header>
-        <ion-toolbar color="dark">
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of pulseras.arreglo">
-            <ion-item (click)="changePosition(p)">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              {{p.title}}
-              <div class="item-note" slot="end">
-              {{p.note}}
-              </div>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
-  </ion-split-pane>
+  <ion-menu side="end">
+    <ion-header>
+      <ion-toolbar color="dark">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of pulseras.arreglo">
+          <ion-item (click)="changePosition(p)">
+            <ion-icon slot="start" [name]="p.icon"></ion-icon>
+            {{p.title}}
+            <div class="item-note" slot="end">
+            {{p.note}}
+            </div>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>
