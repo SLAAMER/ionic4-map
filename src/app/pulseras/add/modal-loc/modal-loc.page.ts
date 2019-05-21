@@ -9,12 +9,12 @@ import { ModalController, NavParams } from '@ionic/angular';
 export class ModalLocPage implements OnInit {
 
   locaciones:any = [
-    { posicion: { lat: 0, lng: 0 }, desc: "Pulsera en Macro Plaza" },
-    { posicion: { lat: 0, lng: 0 }, desc: "Pulsera en Prepa. Lazaro Cardenas" },
-    { posicion: { lat: 0, lng: 0 }, desc: "Pulsera en Plaza Rio" },
-    { posicion: { lat: 0, lng: 0 }, desc: "Pulsera en Unidad Deportiva" },
-    { posicion: { lat: 0, lng: 0 }, desc: "Pulsera en el Cecut" },
-    { posicion: { lat: 0, lng: 0 }, desc: "Pulsera en Playas de Tijuana" },
+    { posicion: { lat: 32.494430, lng: -116.933472 }, desc: "Pulsera en Macro Plaza" },
+    { posicion: { lat: 32.515472, lng: -117.003842 }, desc: "Pulsera en Prepa. Lazaro Cardenas" },
+    { posicion: { lat: 32.527501, lng: -117.019323 }, desc: "Pulsera en Plaza Rio" },
+    { posicion: { lat: 32.513402, lng: -116.973321 }, desc: "Pulsera en Unidad Deportiva" },
+    { posicion: { lat: 32.530140, lng: -117.023519 }, desc: "Pulsera en el Cecut" },
+    { posicion: { lat: 32.527703, lng: -117.123001 }, desc: "Pulsera en Playas de Tijuana" },
   ];
 
   constructor(

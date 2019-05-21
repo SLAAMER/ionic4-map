@@ -3,6 +3,7 @@ import { AlertController, Events, ModalController } from '@ionic/angular';
 import { PulserasService } from 'src/app/services/pulseras/pulseras.service';
 import { ModalPage } from './modal/modal.page';
 import { ModalLocPage } from './modal-loc/modal-loc.page';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add',
@@ -23,7 +24,8 @@ export class AddPage implements OnInit {
 
   etiqueta:string;
 
-  constructor(private alertController: AlertController, private pulseras: PulserasService, private events: Events, private modalCtrl: ModalController) { }
+  constructor(private alertController: AlertController, private pulseras: PulserasService, private events: Events, private modalCtrl: ModalController,
+    private location: Location) { }
 
   ngOnInit() {
 
@@ -66,15 +68,34 @@ export class AddPage implements OnInit {
   }
 
 
-  guardar(){
+  async guardar(){
     console.log(this.nueva);
     
     this.pulseras.getPulseras().then((pul:Array<{ title: string; note: string; icon: string; position: { lat:number, lng:number }}>)=>{
       pul.push(this.nueva);
       this.pulseras.setPulseras(pul).then(()=>{
-        alert("se ha guardado");
+        this.presentAlert();
         this.events.publish("pulseras", pul);
       });
     });
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Exito!',
+      subHeader: 'Se ha guardado la pulsera',
+      message: 'Pulsera guardada: '+ this.nueva.title+': ' +this.nueva.note,
+      backdropDismiss: false,
+      buttons: [
+        {
+          text: 'OK',
+          handler: ()=>{
+            this.location.back();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
