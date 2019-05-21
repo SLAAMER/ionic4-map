@@ -10,19 +10,36 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label>Nombre</ion-label>
+      <ion-label position="floating">Nombre</ion-label>
       <ion-input [(ngModel)]="nueva.title"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Descripcion</ion-label>
+      <ion-label position="floating">Descripcion</ion-label>
       <ion-input [(ngModel)]="nueva.note"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-button (click)="selecIcono()">Selecciona Icono</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-button (click)="selecLoc()">Selecciona Locacion</ion-button>
-    </ion-item>
+    </ion-item> 
   </ion-list>
-  <ion-button color="success" (click)="guardar()">Guardar</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" (click)="selecIcono()">Selecciona Icono</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-icon [name]="nueva.icon"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+          <ion-button style="margin-top: 25px;" expand="full" (click)="selecLoc()">Selecciona Pulsera</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>{{etiqueta}}</ion-label>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button style="margin-top: 35px;" color="success" (click)="guardar()">Guardar</ion-button>
 </ion-content>

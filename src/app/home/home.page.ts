@@ -23,7 +23,7 @@ export class HomePage implements OnInit{
     await this.platform.ready();
     await this.loadMap();
     await this.loadMarkers();
-    await this.mylocation();
+    //await this.mylocation();
   }
 
   loadMap(){
@@ -31,32 +31,39 @@ export class HomePage implements OnInit{
   }
 
   loadMarkers(){
-    this.pulseras.arreglo.forEach((pulsera)=>{
-      this.map.addMarker({
-        position: pulsera.position,
-        title: pulsera.note,
-        icon: 'red'
+    this.pulseras.getPulseras().then((pul)=>{
+      pul.forEach((pulsera)=>{
+        this.map.addMarker({
+          position: pulsera.position,
+          title: pulsera.title + ': ' +pulsera.note,
+          icon: 'red'
+        });
       });
     });
   }
 
-  mylocation(){
-    LocationService.getMyLocation().then((location:MyLocation) =>{
-      this.position = location;
-      this.map.addMarkerSync({
-        position:  this.position.latLng,
-        title: 'Yo estoy aqui',
-        icon: 'yellow'
+  locateMe(){
+    if(!this.position){
+      LocationService.getMyLocation({enableHighAccuracy:true}).then((location:MyLocation) =>{
+        this.position = location;
+        this.map.addMarkerSync({
+          position:  this.position.latLng,
+          title: 'Yo estoy aqui',
+          icon: 'yellow'
+        });
+        this.map.animateCamera({
+          target: this.position.latLng,
+          zoom:16,
+          duration:2000,
+          tilt:45
+        });
+      }).catch(err=>{
+        alert(JSON.stringify(err));
       });
-      this.map.animateCamera({
-        target: this.position.latLng,
-        zoom:16,
-        duration:2000,
-        tilt:45
-      });
-    }).catch(err=>{
-      alert(JSON.stringify(err));
-    });
+    }
+    else{
+      this.locateMeCamera();
+    }
   }
 
   listen(){
@@ -66,15 +73,19 @@ export class HomePage implements OnInit{
           lat: selected.position.lat,
           lng: selected.position.lng
         },
-        duration: 1500
+        duration: 1500,
+        zoom:16,
+        tilt:45
       })
     });
   }
 
-  locateMe(){
+  locateMeCamera(){
     this.map.animateCamera({
       target: this.position.latLng,
-      duration: 1500
+      duration: 1500,
+      zoom:16,
+      tilt:45
     }).catch(err=>alert(JSON.stringify(err)));
   }
 
@@ -87,7 +98,7 @@ export class HomePage implements OnInit{
       let p = pul[pul.length-1];
       this.map.addMarker({
         position: p.position,
-        title: p.note,
+        title: p.title+ ': '+p.note,
         icon: 'red'
       });
     })

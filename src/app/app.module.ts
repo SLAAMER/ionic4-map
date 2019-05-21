@@ -11,6 +11,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { ModalPageModule } from './pulseras/add/modal/modal.module';
+import { ModalLocPageModule } from './pulseras/add/modal-loc/modal-loc.module';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,7 +21,9 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ModalPageModule,
+    ModalLocPageModule
   ],
   providers: [
     StatusBar,
